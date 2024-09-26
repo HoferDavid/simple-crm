@@ -19,5 +19,4 @@ export class HeaderComponent {
   toggleSidenav(): void {
     this.sidenavService.toggle();
   }
-
 }
