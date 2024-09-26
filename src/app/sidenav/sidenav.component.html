@@ -1,0 +1,26 @@
+<!-- <mat-drawer-container class="mat-drawer-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>Auto-resizing sidenav</p>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      Toggle sidenav
+    </button>
+  </div>
+
+</mat-drawer-container> -->
+
+
+
+<mat-sidenav-container>
+  <mat-sidenav opened mode="side" [style.width]="sidenavWidth()">
+    <div class="sidenav-header">
+      <div class="header-text">
+        <h2>Marioland</h2>
+        <p>Super Mario</p>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content class="content"> </mat-sidenav-content>
+</mat-sidenav-container>
