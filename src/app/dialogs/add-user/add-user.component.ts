@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,6 +8,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { User } from '../../../models/user.class';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Firestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-add-user',
@@ -26,6 +27,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './add-user.component.scss',
 })
 export class AddUserComponent {
+  firestore: Firestore = inject(Firestore);
+
   user: User = new User();
   birthDate!: Date;
 
@@ -33,4 +36,6 @@ export class AddUserComponent {
     this.user.birthDate = this.birthDate.getTime();
     console.log('Current User is :', this.user);
   }
+
+
 }
