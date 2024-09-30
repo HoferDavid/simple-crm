@@ -1,4 +1,18 @@
+// mat-dialog-content {
+//     margin-top: 1rem;
+// }
+
 .name-input-container {
     display: flex;
     gap: 1rem;
+    margin-top: 0.4rem;
+}
+
+.zip-input-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.full-width {
+    width: 100%;
 }

@@ -13,17 +13,42 @@
   </div>
 
   <div>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="full-width">
       <mat-label>Birth Date</mat-label>
       <input matInput [matDatepicker]="picker" />
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-
     </mat-form-field>
   </div>
 
-  <div></div>
+  <div>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Address</mat-label>
+      <input matInput placeholder="Last name" />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Street + House No.</mat-label>
+      <input matInput placeholder="Last name" />
+    </mat-form-field>
+  </div>
+
+  <div class="zip-input-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Zip Code</mat-label>
+      <input matInput placeholder="Last name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>City</mat-label>
+      <input matInput placeholder="Last name" />
+    </mat-form-field>
+  </div>
+
 </mat-dialog-content>
+
 <mat-dialog-actions>
   <button mat-button>cancel</button>
   <button mat-button cdkFocusInitial>save</button>
