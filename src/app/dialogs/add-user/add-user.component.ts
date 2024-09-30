@@ -5,6 +5,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { User } from '../../../models/user.class';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-user',
@@ -16,8 +19,18 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     MatFormFieldModule,
     MatButtonModule,
     MatDatepickerModule,
+    FormsModule,
+    CommonModule,
   ],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.scss',
 })
-export class AddUserComponent {}
+export class AddUserComponent {
+  user: User = new User();
+  birthDate!: Date;
+
+  saveUser() {
+    this.user.birthDate = this.birthDate.getTime();
+    console.log('Current User is :', this.user);
+  }
+}
