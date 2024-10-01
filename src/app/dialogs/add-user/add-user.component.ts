@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,23 +22,25 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatButtonModule,
     MatDatepickerModule,
     FormsModule,
-    CommonModule, MatProgressBarModule
+    CommonModule,
+    MatProgressBarModule,
   ],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.scss',
 })
 export class AddUserComponent {
+  constructor(public dialogRef: MatDialogRef<AddUserComponent>) {}
+
   firestore: Firestore = inject(Firestore);
 
   user: User = new User();
   birthDate!: Date;
   loading = false;
 
-  
   async saveUser() {
     this.loading = true;
     this.user.birthDate = this.birthDate.getTime();
-  
+
     try {
       const docRef = await addDoc(this.getRef('users'), this.user.toJSON());
       console.log('Document written with ID: ', docRef.id);
@@ -46,10 +48,11 @@ export class AddUserComponent {
       console.error('Error adding document: ', error);
     }
     this.loading = false;
+    this.dialogRef.close();
   }
 
+  
   getRef(col: string) {
     return collection(this.firestore, col);
   }
-
 }
