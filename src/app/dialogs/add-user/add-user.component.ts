@@ -9,6 +9,7 @@ import { User } from '../../../models/user.class';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-add-user',
@@ -21,7 +22,7 @@ import { Firestore, addDoc, collection } from '@angular/fire/firestore';
     MatButtonModule,
     MatDatepickerModule,
     FormsModule,
-    CommonModule,
+    CommonModule, MatProgressBarModule
   ],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.scss',
@@ -31,16 +32,24 @@ export class AddUserComponent {
 
   user: User = new User();
   birthDate!: Date;
+  loading = false;
 
-
+  
   async saveUser() {
+    this.loading = true;
+    this.user.birthDate = this.birthDate.getTime();
+  
     try {
-      const userRef = collection(this.firestore, 'users');
-      const docRef = await addDoc(userRef, this.user.toJSON());
+      const docRef = await addDoc(this.getRef('users'), this.user.toJSON());
       console.log('Document written with ID: ', docRef.id);
-      
     } catch (error) {
       console.error('Error adding document: ', error);
     }
+    this.loading = false;
   }
+
+  getRef(col: string) {
+    return collection(this.firestore, col);
+  }
+
 }

@@ -14,7 +14,14 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimationsAsync(),
     provideFirebaseApp(() =>
-
+      initializeApp({
+        apiKey: 'AIzaSyCdV4_DTwm14FLEqLX-bXmkNHnBkGfmsQ8',
+        authDomain: 'simple-crm-71ddf.firebaseapp.com',
+        projectId: 'simple-crm-71ddf',
+        storageBucket: 'simple-crm-71ddf.appspot.com',
+        messagingSenderId: '596696624017',
+        appId: '1:596696624017:web:d129b1354769186cf4c830',
+      })
     ),
     provideFirestore(() => getFirestore()),
   ],
