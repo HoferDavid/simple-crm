@@ -8,7 +8,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { User } from '../../../models/user.class';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-add-user',
@@ -32,10 +32,15 @@ export class AddUserComponent {
   user: User = new User();
   birthDate!: Date;
 
-  saveUser() {
-    this.user.birthDate = this.birthDate.getTime();
-    console.log('Current User is :', this.user);
+
+  async saveUser() {
+    try {
+      const userRef = collection(this.firestore, 'users');
+      const docRef = await addDoc(userRef, this.user.toJSON());
+      console.log('Document written with ID: ', docRef.id);
+      
+    } catch (error) {
+      console.error('Error adding document: ', error);
+    }
   }
-
-
 }
