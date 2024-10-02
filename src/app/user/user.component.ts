@@ -8,6 +8,7 @@ import { User } from '../../models/user.class';
 import { MatCardModule } from '@angular/material/card';
 import { collection, Firestore } from '@angular/fire/firestore';
 import { query } from 'express';
+import { UserListService } from '../services/user-list.service';
 
 @Component({
   selector: 'app-user',
@@ -17,6 +18,8 @@ import { query } from 'express';
   styleUrl: './user.component.scss',
 })
 export class UserComponent implements OnInit {
+
+  constructor(private userService: UserListService) {}
 
   firestore: Firestore = inject(Firestore);
 

@@ -5,11 +5,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { User } from '../../../models/user.class';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { UserListService } from '../../services/user-list.service';
+import { User } from '../../../models/user.class';
 
 @Component({
   selector: 'app-add-user',
@@ -29,26 +30,26 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   styleUrl: './add-user.component.scss',
 })
 export class AddUserComponent {
-  constructor(public dialogRef: MatDialogRef<AddUserComponent>) {}
-
-  firestore: Firestore = inject(Firestore);
-
   user: User = new User();
   birthDate!: Date;
   loading = false;
 
-  async saveUser() {
-    this.loading = true;
-    this.user.birthDate = this.birthDate.getTime();
 
-    try {
-      const userRef = collection(this.firestore, 'users');
-      const docRef = await addDoc(userRef, this.user.toJSON());
-      console.log('Document written with ID: ', docRef.id);
-    } catch (error) {
-      console.error('Error adding document: ', error);
+  constructor(
+    public dialogRef: MatDialogRef<AddUserComponent>,
+    public userService: UserListService
+  ) {}
+  
+
+  async saveNewUser() {
+    if (this.birthDate) {
+      this.loading = true;
+      this.user.birthDate = this.birthDate.getTime();
+      await this.userService.saveUser(this.user);
+      this.loading = false;
+      this.dialogRef.close();
+    } else {
+      console.error('Birthdate is undefined');
     }
-    this.loading = false;
-    this.dialogRef.close();
   }
 }
