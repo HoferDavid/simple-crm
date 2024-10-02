@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,7 +10,8 @@ import { CommonModule } from '@angular/common';
 import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserListService } from '../../services/user-list.service';
-import { User } from '../../../models/user.class';
+import { User } from '../../interfaces/user.interface';
+// import { User } from '../../../models/user.class';
 
 @Component({
   selector: 'app-add-user',
@@ -30,16 +31,21 @@ import { User } from '../../../models/user.class';
   styleUrl: './add-user.component.scss',
 })
 export class AddUserComponent {
-  user: User = new User();
+  @Input() user: User = {
+    firstName: '',
+    lastName: '',
+    birthDate: 0,
+    street: '',
+    zipCode: 0,
+    city: '',
+  };
   birthDate!: Date;
   loading = false;
-
 
   constructor(
     public dialogRef: MatDialogRef<AddUserComponent>,
     public userService: UserListService
   ) {}
-  
 
   async saveNewUser() {
     if (this.birthDate) {

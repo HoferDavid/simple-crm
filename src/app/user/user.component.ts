@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddUserComponent } from '../dialogs/add-user/add-user.component';
-import { User } from '../../models/user.class';
+// import { User } from '../../models/user.class';
 import { MatCardModule } from '@angular/material/card';
 import { collection, Firestore } from '@angular/fire/firestore';
 import { query } from 'express';
@@ -23,7 +23,7 @@ export class UserComponent implements OnInit {
 
   firestore: Firestore = inject(Firestore);
 
-  user: User = new User();
+  // user: User = new User();
   allUsers = [];
   
   readonly dialog = inject(MatDialog);
