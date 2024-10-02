@@ -42,17 +42,13 @@ export class AddUserComponent {
     this.user.birthDate = this.birthDate.getTime();
 
     try {
-      const docRef = await addDoc(this.getRef('users'), this.user.toJSON());
+      const userRef = collection(this.firestore, 'users');
+      const docRef = await addDoc(userRef, this.user.toJSON());
       console.log('Document written with ID: ', docRef.id);
     } catch (error) {
       console.error('Error adding document: ', error);
     }
     this.loading = false;
     this.dialogRef.close();
-  }
-
-  
-  getRef(col: string) {
-    return collection(this.firestore, col);
   }
 }
