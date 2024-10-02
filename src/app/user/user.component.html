@@ -5,11 +5,14 @@
       <th>Mail</th>
       <th>City</th>
     </tr>
+
+    @for (user of users; track user) {
     <tr>
-      <td>Super Mario</td>
-      <td>marionintendo.com</td>
-      <td>Marioland</td>
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.lastName }}</td>
+      <td>{{ user.city }}</td>
     </tr>
+    }
   </table>
 </mat-card>
 

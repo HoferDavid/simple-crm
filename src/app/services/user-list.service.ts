@@ -1,17 +1,23 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, Firestore } from '@angular/fire/firestore';
+import { addDoc, collection, Firestore, onSnapshot, query } from '@angular/fire/firestore';
 import { User } from '../interfaces/user.interface';
-// import { User } from '../../models/user.class';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserListService {
-  user: User[] = [];
+  private userSource = new BehaviorSubject<User[]>([]);
+  users$ = this.userSource.asObservable();
+
 
   firestore: Firestore = inject(Firestore);
 
-  constructor() {}
+
+  constructor() {
+    this.subUserList();
+  }
+
 
   async saveUser(user: User) {
     try {
@@ -23,14 +29,15 @@ export class UserListService {
     }
   }
 
-  getCleanJson(user: User):{} {
-    return {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      birthDate: user.birthDate,
-      street: user.street,
-      zipCode: user.zipCode,
-      city: user.city,
-    };
+
+  subUserList() {
+    const q = query(collection(this.firestore, 'users'));
+    onSnapshot(q, (snapshot) => {
+      const users: User[] = [];
+      snapshot.forEach((doc) => {
+        users.push(doc.data() as User);
+      });
+      this.userSource.next(users);
+    });
   }
 }
