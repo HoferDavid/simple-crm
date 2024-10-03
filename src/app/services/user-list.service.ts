@@ -16,6 +16,8 @@ export class UserListService {
 
   constructor() {
     this.subUserList();
+    console.log(this.users$);
+    
   }
 
 
@@ -35,7 +37,9 @@ export class UserListService {
     onSnapshot(q, (snapshot) => {
       const users: User[] = [];
       snapshot.forEach((doc) => {
-        users.push(doc.data() as User);
+        const userData = doc.data() as User;
+        const userWithId = { ...userData, id: doc.id };
+        users.push(userWithId);
       });
       this.userSource.next(users);
     });

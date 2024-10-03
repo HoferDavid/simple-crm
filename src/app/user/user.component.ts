@@ -7,11 +7,12 @@ import { AddUserComponent } from '../dialogs/add-user/add-user.component';
 import { MatCardModule } from '@angular/material/card';
 import { UserListService } from '../services/user-list.service';
 import { User } from '../interfaces/user.interface';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, MatTooltipModule, MatDialogModule, AddUserComponent, MatCardModule],
+  imports: [MatIconModule, MatButtonModule, MatTooltipModule, MatDialogModule, AddUserComponent, MatCardModule, RouterModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
 })

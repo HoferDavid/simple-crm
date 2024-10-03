@@ -7,7 +7,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserListService } from '../../services/user-list.service';
 import { User } from '../../interfaces/user.interface';
