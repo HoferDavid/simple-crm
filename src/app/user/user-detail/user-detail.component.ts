@@ -47,9 +47,10 @@ export class UserDetailComponent implements OnInit {
   editAddressDetails() {
     if (this.user) {
     const dialog = this.dialog.open(EditAddressComponent);
-    dialog.componentInstance.user = this.user;
+    dialog.componentInstance.user = { ...this.user };
+    dialog.componentInstance.userId = this.userId;
     } else {
-      console.log('edit Address Details error');
+      console.log('Edit Address Details error');
       
     }
   }
@@ -57,9 +58,9 @@ export class UserDetailComponent implements OnInit {
   editUserDetails() {
     if (this.user) {
       const dialog = this.dialog.open(EditUserComponent);
-      dialog.componentInstance.user = this.user;
+      dialog.componentInstance.user = { ...this.user };
     } else {
-      console.log('edit Address Details error');
+      console.log('Edit Address Details error');
     }
   }
 }

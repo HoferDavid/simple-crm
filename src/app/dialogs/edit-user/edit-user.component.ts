@@ -40,8 +40,14 @@ export class EditUserComponent {
   loading = false;
   birthDate!: Date;
 
+
   constructor(
     public dialogRef: MatDialogRef<EditUserComponent>,
     public userService: UserListService
   ) {}
+
+  saveEditedUser() {
+    console.log(this.user);
+    
+  }
 }

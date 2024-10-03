@@ -17,7 +17,9 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatProgressBarModule,
     CommonModule,
-    FormsModule, MatButtonModule, MatInputModule
+    FormsModule,
+    MatButtonModule,
+    MatInputModule,
   ],
   templateUrl: './edit-address.component.html',
   styleUrl: './edit-address.component.scss',
@@ -33,13 +35,18 @@ export class EditAddressComponent {
     city: '',
   };
 
-
   birthDate!: Date;
   loading = false;
-
+  userId = '';
 
   constructor(
     public dialogRef: MatDialogRef<EditAddressComponent>,
     public userService: UserListService
   ) {}
+
+
+  saveEditedAddress() {
+    console.log(this.userId);
+    
+  }
 }
