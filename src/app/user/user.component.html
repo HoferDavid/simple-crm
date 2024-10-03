@@ -8,8 +8,8 @@
 
     @for (user of users; track user) {
     <tr>
-      <td>{{ user.firstName }}</td>
-      <td>{{ user.lastName }}</td>
+      <td>{{ user.firstName }} {{ user.lastName }}</td>
+      <td>{{ user.mail }}</td>
       <td>{{ user.city }}</td>
     </tr>
     }

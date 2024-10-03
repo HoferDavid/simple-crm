@@ -34,6 +34,7 @@ export class AddUserComponent {
   @Input() user: User = {
     firstName: '',
     lastName: '',
+    mail: '',
     birthDate: null,
     street: '',
     zipCode: null,
@@ -43,10 +44,7 @@ export class AddUserComponent {
   loading = false;
 
 
-  constructor(
-    public dialogRef: MatDialogRef<AddUserComponent>,
-    public userService: UserListService
-  ) {}
+  constructor(public dialogRef: MatDialogRef<AddUserComponent>, public userService: UserListService) {}
 
   
   async saveNewUser() {
