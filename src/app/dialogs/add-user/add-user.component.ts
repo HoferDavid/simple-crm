@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserListService } from '../../services/user-list.service';
 import { User } from '../../interfaces/user.interface';
-// import { User } from '../../../models/user.class';
 
 @Component({
   selector: 'app-add-user',

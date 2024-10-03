@@ -1,22 +1,49 @@
 <div class="wrapper">
   <mat-card class="user-detail-header">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="usermenu"
+      class="btn-right-corner"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #usermenu="matMenu">
+      <button mat-menu-item (click)="editUserDetails()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+    </mat-menu>
+
     <div class="user-profile">
       <img src="img/supermario.jpg" alt="" />
       <div class="user-details">
-        <h3>Max Muster</h3>
-        <span>mailATmail.com</span>
+        <h3>{{ user?.firstName }} {{ user?.lastName }}</h3>
+        <span>{{ user?.mail }}</span>
       </div>
     </div>
   </mat-card>
 
-
   <mat-card appearance="outlined">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="addressmenu"
+      class="btn-right-corner"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #addressmenu="matMenu">
+      <button mat-menu-item (click)="editAddressDetails()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+    </mat-menu>
+
     <mat-card-header>
       <mat-card-title>Address</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-      street <br />
-      mustercity
+    <mat-card-content class="address-name-container">
+      <span>{{ user?.street }}</span>
+      <span>{{ user?.zipCode }} {{ user?.city }}</span>
     </mat-card-content>
   </mat-card>
 </div>

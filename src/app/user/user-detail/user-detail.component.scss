@@ -35,3 +35,14 @@
     font-size: 1rem;
   }
 }
+
+.address-name-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-right-corner {
+    position: absolute;
+    right: 0;
+    top: 0;
+}

@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, Firestore, onSnapshot, query } from '@angular/fire/firestore';
+import { addDoc, collection, doc, Firestore, getDoc, onSnapshot, query } from '@angular/fire/firestore';
 import { User } from '../interfaces/user.interface';
 import { BehaviorSubject } from 'rxjs';
 
@@ -43,5 +43,23 @@ export class UserListService {
       });
       this.userSource.next(users);
     });
+  }
+
+
+  async getUserById(userId: string): Promise<User | undefined> {
+    try {
+      const userRef = doc(this.firestore, 'users', userId);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        return userSnap.data() as User;
+      } else {
+        console.log('no such document');
+        return undefined;
+      }
+    } catch (error) {
+      console.error('Erros getting user: ', error);
+      return undefined;
+    }
   }
 }
