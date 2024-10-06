@@ -8,3 +8,6 @@ export interface User {
   zipCode: number | null;
   city: string;
 }
+
+
+

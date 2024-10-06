@@ -12,28 +12,33 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, MatTooltipModule, MatDialogModule, AddUserComponent, MatCardModule, RouterModule],
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatDialogModule,
+    AddUserComponent,
+    MatCardModule,
+    RouterModule,
+  ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
 })
 export class UserComponent implements OnInit {
   users: User[] = [];
 
-
   constructor(public userListService: UserListService) {}
 
-
   readonly dialog = inject(MatDialog);
-
 
   openDialog() {
     this.dialog.open(AddUserComponent);
   }
 
-
   ngOnInit(): void {
-    this.userListService.users$.subscribe(users => {
-      this.users = users;
+    this.userListService.users$.subscribe((users) => {
+      console.log('Updated users in component: ', users); // Debugging
+      this.users = users; // This should trigger a view update
     });
   }
 }

@@ -44,9 +44,19 @@ export class EditAddressComponent {
     public userService: UserListService
   ) {}
 
-
   saveEditedAddress() {
-    console.log(this.userId);
-    
+    this.loading = true;
+    this.userService
+      .updateUser(this.userId, this.user)
+      .then(() => {
+        console.log('Address updated:', this.user);
+        this.dialogRef.close(); // Close dialog only after successful update
+      })
+      .catch((error) => {
+        console.error('Error updating address: ', error);
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   }
 }

@@ -1,5 +1,14 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, doc, Firestore, getDoc, onSnapshot, query } from '@angular/fire/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  Firestore,
+  getDoc,
+  onSnapshot,
+  query,
+  setDoc,
+} from '@angular/fire/firestore';
 import { User } from '../interfaces/user.interface';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,16 +19,12 @@ export class UserListService {
   private userSource = new BehaviorSubject<User[]>([]);
   users$ = this.userSource.asObservable();
 
-
   firestore: Firestore = inject(Firestore);
-
 
   constructor() {
     this.subUserList();
     console.log(this.users$);
-    
   }
-
 
   async saveUser(user: User) {
     try {
@@ -31,7 +36,6 @@ export class UserListService {
     }
   }
 
-
   subUserList() {
     const q = query(collection(this.firestore, 'users'));
     onSnapshot(q, (snapshot) => {
@@ -41,10 +45,10 @@ export class UserListService {
         const userWithId = { ...userData, id: doc.id };
         users.push(userWithId);
       });
+      console.log('Updated users from Firestore: ', users); // Check if this logs updated users
       this.userSource.next(users);
     });
   }
-
 
   async getUserById(userId: string): Promise<User | undefined> {
     try {
@@ -60,6 +64,17 @@ export class UserListService {
     } catch (error) {
       console.error('Erros getting user: ', error);
       return undefined;
+    }
+  }
+
+  async updateUser(userId: string, updatedUser: Partial<User>): Promise<void> {
+    try {
+      const userRef = doc(this.firestore, 'users', userId);
+      await setDoc(userRef, updatedUser, { merge: true });
+      console.log('User updated with ID: ', userId);
+      // No need to update local state here; Firestore will handle it
+    } catch (error) {
+      console.error('Error updating user: ', error);
     }
   }
 }
